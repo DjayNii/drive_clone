@@ -7,8 +7,16 @@ const fileModel = require("../model/files.model");
 
 const AuthMiddleWare = require("../middleware/auth");
 
-router.get("/home", AuthMiddleWare, (req, res) => {
-  res.render("home");
+router.get("/home", AuthMiddleWare, async (req, res) => {
+  const userFile = await fileModel.find({
+    user: req.user.userID,
+  });
+
+  console.log(userFile);
+
+  res.render("home", {
+    files: userFile,
+  });
 }); // by using the middleware this page only renders if we logged in
 
 router.post(

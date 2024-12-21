@@ -79,6 +79,14 @@
           <i class="ri-close-line"></i>
         </button>
       </div>
+
+      <div class="files mt-3 flex-col gap-2">
+        <% files.forEach((file)=>{ %>
+        <div class="p-2 rounded-md cursor-pointer bg-sky-300">
+          <h1><%= file.originName %></h1>
+        </div>
+      </div>
+      <% }) %>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
