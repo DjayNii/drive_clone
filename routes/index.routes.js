@@ -49,8 +49,47 @@ router.post(
       user: req.user.userID,
     });
 
-    res.json(newFile);
+    console.log("Generated Signed URL:");
+    const { data: signedData, error: signedError } = await supabase.storage
+      .from("drive")
+      .createSignedUrl(filePath, 60);
+
+    if (signedError) {
+      console.error("Signed URL Error:", signedError.message);
+      return res.status(500).send(signedError.message);
+    }
+
+    res.json({ file: newFile, signedUrl: signedData.signedUrl });
   }
 );
+
+router.get("/download/:path", AuthMiddleWare, async (req, res) => {
+  const loggedInUserId = req.user.userID;
+  const path = req.params.path;
+
+  console.log(path);
+
+  const file = await fileModel.findOne({
+    user: loggedInUserId,
+    path: path,
+  });
+
+  if (!file) {
+    return res.status(401).json({
+      message: "Unauthorized",
+    });
+  }
+
+  const { data, error } = await supabase.storage
+    .from("drive")
+    .createSignedUrl(path, 6000);
+
+  if (error) {
+    return res.status(500).send(error.message);
+  }
+
+  const signedUrl = data.signedUrl;
+  res.redirect(signedUrl); // Redirects to the signed URL
+});
 
 module.exports = router;

@@ -82,8 +82,19 @@
 
       <div class="files mt-3 flex-col gap-2">
         <% files.forEach((file)=>{ %>
-        <div class="p-2 rounded-md cursor-pointer bg-sky-300">
+        <div
+          class="p-2 rounded-md cursor-pointer bg-sky-300 flex justify-between"
+        >
           <h1><%= file.originName %></h1>
+          <p>File Path: <%= file.path %></p>
+
+          <a
+            href="/download/<%= file.path %>"
+            class="text-blue-500 hover:text-slate-950"
+            download="<%= file.originName %>"
+          >
+            <i class="ri-download-fill"></i>
+          </a>
         </div>
       </div>
       <% }) %>
