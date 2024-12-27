@@ -100,7 +100,7 @@ router.post(
 
     res.cookie("token", token); //2 parmeter name of token ,value or var of token . we put this details in cookie to call it later for authentication
 
-    res.send("Logged-in");
+    res.redirect("/home");
   }
 );
 
