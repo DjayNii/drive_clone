@@ -82,14 +82,15 @@ router.get("/download/:path", AuthMiddleWare, async (req, res) => {
 
   const { data, error } = await supabase.storage
     .from("drive")
-    .createSignedUrl(path, 6000);
+    .createSignedUrl(path, 60);
 
   if (error) {
+    console.error("Supabase Signed URL Error:", error.message);
     return res.status(500).send(error.message);
   }
 
   const signedUrl = data.signedUrl;
-  res.redirect(signedUrl); // Redirects to the signed URL
+  res.send(signedUrl); // Redirects to the signed URL
 });
 
 module.exports = router;
