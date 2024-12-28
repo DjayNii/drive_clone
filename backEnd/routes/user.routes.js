@@ -8,10 +8,6 @@ const bcrypt = require("bcrypt");
 
 const jwt = require("jsonwebtoken");
 
-router.get("/register", (req, res) => {
-  res.render("register");
-});
-
 router.post(
   "/register",
   body("email").trim().isEmail().isLength({ min: 10 }),

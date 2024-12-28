@@ -93,4 +93,8 @@ router.get("/download/:path", AuthMiddleWare, async (req, res) => {
   res.send(signedUrl); // Redirects to the signed URL
 });
 
+router.get("/begin", (req, res) => {
+  res.json({ message: "Render the Login component on the client" });
+});
+
 module.exports = router;

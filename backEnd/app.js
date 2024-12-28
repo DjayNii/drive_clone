@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const userRouter = require("./routes/user.routes");
 const indexRouter = require("./routes/index.routes");
 const dotenv = require("dotenv");
@@ -9,6 +10,7 @@ connectToDb();
 const cookiesParser = require("cookie-parser");
 
 const app = express();
+app.use(cors());
 
 app.set("view engine", "ejs");
 app.use(cookiesParser());
