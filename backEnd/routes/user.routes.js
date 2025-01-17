@@ -62,41 +62,46 @@ router.post(
     }
 
     const { username, password } = req.body;
-
-    const user = await userModel.findOne({
-      username,
-    });
-
-    // console.log(user);
-
-    if (!user) {
-      return res.status(400).json({
-        message: "username or password is incorrect",
+    try {
+      const user = await userModel.findOne({
+        username,
       });
+
+      // console.log(user);
+
+      if (!user) {
+        return res.status(400).json({
+          message: "username or password is incorrect",
+        });
+      }
+
+      const isMatch = await bcrypt.compare(password, user.password);
+
+      // console.log(isMatch);
+
+      if (!isMatch) {
+        return res.status(400).json({
+          message: " username or password is incorrect",
+        });
+      }
+
+      const token = jwt.sign(
+        {
+          userID: user._id,
+          email: user.email,
+          username: user.username,
+        },
+        process.env.JWT_SECRET
+      );
+
+      res.cookie("token", token).status(200).json({
+        message: "Login successful",
+        token, // Optional: for debugging or front-end usage
+      }); //2 parmeter name of token ,value or var of token . we put this details in cookie to call it later for authentication
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Internal server error" });
     }
-
-    const isMatch = await bcrypt.compare(password, user.password);
-
-    // console.log(isMatch);
-
-    if (!isMatch) {
-      return res.status(400).json({
-        message: " username or password is incorrect",
-      });
-    }
-
-    const token = jwt.sign(
-      {
-        userID: user._id,
-        email: user.email,
-        username: user.username,
-      },
-      process.env.JWT_SECRET
-    );
-
-    res.cookie("token", token); //2 parmeter name of token ,value or var of token . we put this details in cookie to call it later for authentication
-
-    res.redirect("/home");
   }
 );
 
