@@ -10,7 +10,12 @@ connectToDb();
 const cookiesParser = require("cookie-parser");
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+  origin: "http://localhost:5173", // Your frontend URL
+  credentials: true, // Allows cookies to be sent
+};
+
+app.use(cors(corsOptions));
 
 app.set("view engine", "ejs");
 app.use(cookiesParser());

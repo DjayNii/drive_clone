@@ -8,6 +8,9 @@ const bcrypt = require("bcrypt");
 
 const jwt = require("jsonwebtoken");
 
+router.get("/register", (req, res) => {
+  res.render("register");
+});
 router.post(
   "/register",
   body("email").trim().isEmail().isLength({ min: 10 }),
@@ -19,7 +22,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({
         errors: errors.array(),
-        message: "invalid data",
+        message: "Invalid data",
       });
     }
 
@@ -53,11 +56,16 @@ router.post(
   body("password").trim().isLength({ min: 5 }),
   async (req, res) => {
     const errors = validationResult(req);
+    errorArray = errors.array();
+    const errMessage =
+      errorArray.length > 1
+        ? `Invalid ${errorArray[0].path} and ${errorArray[1].path}`
+        : `Invalid ${errorArray[0].path}`;
 
     if (!errors.isEmpty()) {
       return res.status(400).json({
         error: errors.array(),
-        message: "invalid data",
+        message: "Invalid data",
       });
     }
 

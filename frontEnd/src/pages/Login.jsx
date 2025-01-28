@@ -22,9 +22,20 @@ function Login() {
     try {
       const response = await axios.post(
         "http://localhost:3000/user/login",
-        formData
+        formData,
+        {
+          withCredentials: true, // Ensures cookies are included
+        }
       );
-      console.log(response.data.token);
+
+      const token = response.data.token;
+      console.log(token);
+
+      // Save the token to localStorage with a key
+      localStorage.setItem("token", token);
+
+      // Navigate to the /home route
+      navigate("/home");
     } catch (err) {
       setError(err.response?.data?.message || "something went wrong");
     }
@@ -32,21 +43,21 @@ function Login() {
 
   return (
     <>
-      <div className="bg-white w-screen h-screen flex flex-col relative">
+      <div className="bg-white1 w-screen h-screen flex flex-col relative">
         <div className="right bg-primary1 rounded-[46px] w-[60%] h-[90%] top-[5vh] right-[2vh] absolute shadow-custom"></div>
         <div className="left w-[40%] h-full pl-[5vh] pt-[25vh]">
           <div className="heading flex flex-col leading-[6vh]">
-            <p className="font-Sora text-[72px] font-extrabold m-0 inline">
+            <p className="font-Sora  text-black1 text-[72px] font-extrabold m-0 inline">
               THRIVE
             </p>
-            <p className="font-Sora text-[21px] font-light m-0 ps-3">
+            <p className="font-Sora text-[21px] text-black7 font-light m-0 ps-3">
               Organize, Manage, and Optimize your files.
             </p>
           </div>
 
           <form className="form mt-16 w-1/2" onSubmit={handlesubmit}>
             <div className="pl-3 flex flex-col w-full gap-2">
-              <label htmlFor="username" className="font-Sora">
+              <label htmlFor="username" className="font-Sora text-black">
                 Username:
               </label>
               <input
@@ -56,7 +67,7 @@ function Login() {
                 value={formData.username}
                 onChange={handleChange}
                 placeholder="enter your username"
-                className="w-full p-2 bg-white rounded-md border-primary1 border-solid border-[.3vh]"
+                className="w-full p-2 bg-white1 rounded-md border-white4 border-solid border-[.3vh] shadow-white4 shadow-md placeholder-black5"
               />
             </div>
             <div className="pl-3 mt-3 flex flex-col w-full gap-2">
@@ -70,12 +81,12 @@ function Login() {
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="enter your password"
-                className="w-full p-2 bg-white rounded-md border-primary1 border-solid border-[.3vh]"
+                className="w-full p-2 bg-white1 rounded-md border-white4 border-solid border-[.3vh] shadow-white4 shadow-md placeholder-black5"
               />
             </div>
 
-            {error && <p className="text-red-500 ml-3">{error}</p>}
-            <button className="mt-3 ml-3 w-[97%] p-3 rounded-md bg-secondary text-[2vh] font-bold hover:bg-[#d2bb44]">
+            {error && <p className="text-secondary6 ml-3">{error}</p>}
+            <button className="mt-3 ml-3 w-[97%] p-3 rounded-md bg-secondary1 text-[2vh] font-bold hover:bg-[#d2bb44]">
               Submit
             </button>
           </form>

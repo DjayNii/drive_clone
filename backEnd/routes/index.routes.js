@@ -14,7 +14,10 @@ router.get("/home", AuthMiddleWare, async (req, res) => {
 
   console.log(userFile);
 
-  res.render("home", {
+  // res.render("home", {
+  //   files: userFile,
+  // });
+  res.json({
     files: userFile,
   });
 }); // by using the middleware this page only renders if we logged in
@@ -42,11 +45,13 @@ router.post(
 
     const filePath = data.path; // extracting file path from that data
     const originalName = req.file.originalname; // extracting orginal name from that data
+    const fileType = req.file.mimetype; // extracting file type from that data
 
     const newFile = await fileModel.create({
       path: filePath,
       originName: originalName,
       user: req.user.userID,
+      fileType: fileType,
     });
 
     console.log("Generated Signed URL:");
@@ -91,10 +96,6 @@ router.get("/download/:path", AuthMiddleWare, async (req, res) => {
 
   const signedUrl = data.signedUrl;
   res.send(signedUrl); // Redirects to the signed URL
-});
-
-router.get("/begin", (req, res) => {
-  res.json({ message: "Render the Login component on the client" });
 });
 
 module.exports = router;
