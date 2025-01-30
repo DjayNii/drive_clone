@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import UploadButton from "../components/UploadButton";
+import Files from "../components/Files";
 
 function Home() {
   const [files, setFiles] = useState([]);
@@ -25,43 +26,37 @@ function Home() {
     }
   };
 
-  const filetype = (file) => {
-    const fileImage = file.fileType.split("/")[1];
-    if (fileImage === "jpeg") {
-      return "primary5";
-    }
-
-    return "secondary1";
-  };
-
   return (
     <>
-      <main className="p-3 bg-white1 dark:bg-black1 h-screen w-screen">
+      <main className="p-0 bg-white1 dark:bg-blackMin1 h-screen w-screen">
         {error && <p>{error}</p>}
 
-        <nav className="flex flex-row justify-between">
+        <nav className="mb-3 flex flex-row  p-3 justify-between items-center shadow-fileShadowWhite dark:shadow-fileShadowDark">
           {/* the upload button */}
           <UploadButton refereshFiles={fetchFiles} />
+          <h1 className="font-Sora font-bold text-[2vw]  text-black1 dark:text-white1 ">
+            Thrive
+          </h1>
           {/* the logOut button */}
-          <div>
-            <button className="bg-primary5 hover:bg-primary6 text-white font-bold font-mono py-2 px-4 rounded-md mb-4">
+          <div className="flex flex-row gap-2">
+            <button className="bg-primary5 hover:bg-primary6 text-white font-bold font-mono py-2 px-4 rounded-md ">
               Log Out
             </button>
           </div>
         </nav>
 
         {/* the files */}
-        <div>
+        <div className="flex flex-row  flex-wrap gap-2 p-2">
           {files.length > 0 ? (
             files.map((file) => (
               <div
                 key={file._id}
-                className={`bg-${filetype(
-                  file
-                )} mb-2 p-2 flex flex-row justify-around`}
+                className="mb-2 p-2 flex flex-row justify-around"
               >
-                <p>File Name: {file.originName}</p>
-                <p>fileType: {file.fileType.split("/")[1]}</p>
+                <Files
+                  Name={file.originName}
+                  fileType={file.fileType.split("/")[0]}
+                />
               </div>
             ))
           ) : (

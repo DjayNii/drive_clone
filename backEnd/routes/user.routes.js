@@ -57,10 +57,10 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     errorArray = errors.array();
-    const errMessage =
-      errorArray.length > 1
-        ? `Invalid ${errorArray[0].path} and ${errorArray[1].path}`
-        : `Invalid ${errorArray[0].path}`;
+    // const errMessage =
+    //   errorArray.length > 1
+    //     ? `Invalid ${errorArray[0].path} and ${errorArray[1].path}`
+    //     : `Invalid ${errorArray[0].path}`;
 
     if (!errors.isEmpty()) {
       return res.status(400).json({

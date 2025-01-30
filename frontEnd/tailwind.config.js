@@ -24,6 +24,7 @@ export default {
         black5: "#707070",
         black6: "#808080",
         black7: "#A9A9A9",
+        blackMin1: "#111",
         white: "#F5F5F5",
         white1: "#FFFFFF",
         white2: "#F8F8F8",
@@ -37,6 +38,10 @@ export default {
       },
       boxShadow: {
         custom: " inset 0px 0px 10px rgba(0,0,0,0.3)", // Define your custom shadow
+        fileShadowWhite:
+          " 0 7px 3px 0 rgba(70, 130, 180, 0.2), 0 2px 10px 0 rgba(70, 130, 180, 0.19);",
+        fileShadowDark:
+          "0 6px 7px 0 rgba(50,80,220,0.2), 0 6px 15px 0 rgb(50, 80, 220,0.19)",
       },
     },
   },

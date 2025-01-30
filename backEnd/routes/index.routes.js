@@ -64,7 +64,10 @@ router.post(
       return res.status(500).send(signedError.message);
     }
 
-    res.json({ file: newFile, signedUrl: signedData.signedUrl });
+    res.json({
+      file: newFile,
+      signedUrl: signedData.signedUrl,
+    });
   }
 );
 
