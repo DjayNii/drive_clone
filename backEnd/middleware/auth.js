@@ -10,7 +10,7 @@ function auth(req, res, next) {
   if (!token) {
     return res.status(401).json({
       // 401 status represents unauthorized
-      message: "Unauthorized user",
+      message: "Unauthorized",
     });
   }
 

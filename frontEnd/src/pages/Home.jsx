@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import UploadButton from "../components/UploadButton";
 import Files from "../components/Files";
+import LogoutButton from "../components/LogoutButton";
 
 function Home() {
   const [files, setFiles] = useState([]);
@@ -41,15 +42,11 @@ function Home() {
             Thrive
           </h1>
           {/* the logOut button */}
-          <div className="flex flex-row gap-2">
-            <button className="bg-primary5 hover:bg-primary6 text-white font-bold font-mono py-2 px-4 rounded-md ">
-              Log Out
-            </button>
-          </div>
+          <LogoutButton />
         </nav>
 
         {/* Hero section */}
-        <div className="w-full">
+        <div>
           {/* title */}
           <div className="p-2">
             <h1 className="font-Sora font-bold text-[5vw]  text-black1 dark:text-white1 ">
@@ -57,14 +54,18 @@ function Home() {
             </h1>
           </div>
           {/* the files */}
-          <div className="flex flex-row  flex-wrap gap-2 p-2">
+          <div className="flex flex-row  flex-wrap gap-2 p-2 bg-white1 dark:bg-blackMin1">
             {files.length > 0 ? (
               files.map((file) => (
                 <div
                   key={file._id}
                   className="mb-2 p-2 flex flex-row justify-around"
                 >
-                  <Files Name={file.originName} fileType={file.fileType} />
+                  <Files
+                    Name={file.originName}
+                    fileType={file.fileType}
+                    path={file.path}
+                  />
                 </div>
               ))
             ) : (

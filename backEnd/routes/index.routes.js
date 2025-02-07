@@ -73,25 +73,24 @@ router.post(
 );
 
 router.get("/download/:path", AuthMiddleWare, async (req, res) => {
-  const loggedInUserId = req.user.userID;
+  const loggedInUserId = "6794c012f9f314f61814db63";
   const path = req.params.path;
-
-  console.log(path);
+  const download_path = `uploads/${path}`;
 
   const file = await fileModel.findOne({
     user: loggedInUserId,
-    path: path,
+    path: download_path,
   });
 
   if (!file) {
     return res.status(401).json({
-      message: "Unauthorized",
+      message: "file not found",
     });
   }
 
   const { data, error } = await supabase.storage
     .from("drive")
-    .createSignedUrl(path, 60);
+    .createSignedUrl(download_path, 60, { download: file.name });
 
   if (error) {
     console.error("Supabase Signed URL Error:", error.message);
@@ -99,7 +98,7 @@ router.get("/download/:path", AuthMiddleWare, async (req, res) => {
   }
 
   const signedUrl = data.signedUrl;
-  res.send(signedUrl); // Redirects to the signed URL
+  return res.json({ sign: signedUrl });
 });
 
 module.exports = router;
