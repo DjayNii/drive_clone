@@ -4,6 +4,7 @@ const router = express.Router();
 const upload = require("../config/multer.config");
 const supabase = require("../config/supabase.config");
 const fileModel = require("../model/files.model");
+const userModel = require("../model/user.model");
 
 const AuthMiddleWare = require("../middleware/auth");
 
@@ -11,14 +12,14 @@ router.get("/home", AuthMiddleWare, async (req, res) => {
   const userFile = await fileModel.find({
     user: req.user.userID,
   });
-
-  console.log(userFile);
+  const userDets = await userModel.findById(req.user.userID);
 
   // res.render("home", {
   //   files: userFile,
   // });
   res.json({
     files: userFile,
+    dets: userDets,
   });
 }); // by using the middleware this page only renders if we logged in
 

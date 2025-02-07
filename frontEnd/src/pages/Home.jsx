@@ -6,6 +6,7 @@ import Files from "../components/Files";
 function Home() {
   const [files, setFiles] = useState([]);
   const [error, setError] = useState("");
+  const [dets, setDets] = useState({});
 
   useEffect(() => {
     fetchFiles();
@@ -19,6 +20,8 @@ function Home() {
       console.log(response.data);
 
       setFiles(response.data.files || []);
+      setDets(response.data.dets || {});
+      console.log(dets);
     } catch (error) {
       setError(
         error.response?.data?.message || "Failed to Fetch files. Internal error"
@@ -45,23 +48,29 @@ function Home() {
           </div>
         </nav>
 
-        {/* the files */}
-        <div className="flex flex-row  flex-wrap gap-2 p-2">
-          {files.length > 0 ? (
-            files.map((file) => (
-              <div
-                key={file._id}
-                className="mb-2 p-2 flex flex-row justify-around"
-              >
-                <Files
-                  Name={file.originName}
-                  fileType={file.fileType.split("/")[0]}
-                />
-              </div>
-            ))
-          ) : (
-            <p>No files available</p>
-          )}
+        {/* Hero section */}
+        <div className="w-full">
+          {/* title */}
+          <div className="p-2">
+            <h1 className="font-Sora font-bold text-[5vw]  text-black1 dark:text-white1 ">
+              Hello {dets.username}
+            </h1>
+          </div>
+          {/* the files */}
+          <div className="flex flex-row  flex-wrap gap-2 p-2">
+            {files.length > 0 ? (
+              files.map((file) => (
+                <div
+                  key={file._id}
+                  className="mb-2 p-2 flex flex-row justify-around"
+                >
+                  <Files Name={file.originName} fileType={file.fileType} />
+                </div>
+              ))
+            ) : (
+              <p>No files available</p>
+            )}
+          </div>
         </div>
       </main>
     </>

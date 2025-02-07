@@ -4,6 +4,10 @@ import {
   RiFilePdf2Fill,
   RiFileTextFill,
   RiFileMusicFill,
+  RiJavascriptFill,
+  RiFileCodeFill,
+  RiHtml5Fill,
+  RiFileZipFill,
 } from "@remixicon/react";
 
 function FileLogos({ fileType }) {
@@ -13,14 +17,26 @@ function FileLogos({ fileType }) {
     setIsDarkMode(document.documentElement.classList.contains("dark"));
   }, []);
 
-  if (fileType === "image") {
-    return <RiFileImageFill size={75} color={isDarkMode ? "black" : "white"} />;
-  } else if (fileType === "application") {
-    return <RiFilePdf2Fill size={75} color={isDarkMode ? "black" : "white"} />;
-  } else if (fileType === "text") {
-    return <RiFileTextFill size={75} color={isDarkMode ? "black" : "white"} />;
-  } else if (fileType === "video") {
-    return <RiFileMusicFill size={75} color={isDarkMode ? "black" : "white"} />;
+  const icons = {
+    image: <RiFileImageFill size={75} color={isDarkMode ? "black" : "white"} />,
+    html: <RiHtml5Fill size={75} color={isDarkMode ? "black" : "white"} />,
+    pdf: <RiFilePdf2Fill size={75} color={isDarkMode ? "black" : "white"} />,
+    "x-javascript": (
+      <RiJavascriptFill size={75} color={isDarkMode ? "black" : "white"} />
+    ),
+    "x-zip-compressed": (
+      <RiFileZipFill size={75} color={isDarkMode ? "black" : "white"} />
+    ),
+    application: (
+      <RiFileCodeFill size={75} color={isDarkMode ? "black" : "white"} />
+    ),
+    text: <RiFileTextFill size={75} color={isDarkMode ? "black" : "white"} />,
+    video: <RiFileMusicFill size={75} color={isDarkMode ? "black" : "white"} />,
+  };
+
+  for (const [key, icon] of Object.entries(icons)) {
+    // object.enttries returns imageiconhtmlicon
+    if (fileType.includes(key)) return icon;
   }
 
   return null;
