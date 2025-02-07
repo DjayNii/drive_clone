@@ -49,8 +49,8 @@ function Files({ Name, fileType, path }) {
         <div className="bg-black1 p-2 rounded-md flex justify-center">
           <FileLogos fileType={fileType} />
         </div>
-        <div className="flex flex-row text-sm gap-3 items-center justify-between text-primary5">
-          <p className="break-words ">{Name}</p>
+        <div className="flex flex-row text-xs gap-3 items-center justify-between text-primary5">
+          <p className="break-words font-parkinsans  ">{Name}</p>
           <div className="border-2 border-primary5 rounded-md p-1 cursor-pointer">
             <RiDownloadFill size={20} color="#4682B4" onClick={handleSubmit} />
           </div>

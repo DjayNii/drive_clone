@@ -43,7 +43,21 @@ export default {
         fileShadowDark:
           "0 6px 7px 0 rgba(50,80,220,0.2), 0 6px 15px 0 rgb(50, 80, 220,0.19)",
       },
+      textShadow: {
+        fileShadowDark: "0 6px 7px 0 rgba(50,80,220,0.2)",
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities(
+        {
+          ".text-shadow-fileShadowDark": {
+            textShadow: "0 6px 7px 0 rgba(50,80,220,0.2)",
+          },
+        },
+        ["responsive", "hover"]
+      );
+    },
+  ],
 };

@@ -17,7 +17,7 @@ function LogoutButton() {
   return (
     <div className="flex flex-row gap-2">
       <button
-        className="bg-primary5 hover:bg-primary6 text-white font-bold font-mono py-2 px-4 rounded-md "
+        className="bg-blue-600 dark:bg-secondary4 hover:bg-blue-800 dark:hover:bg-secondary6 text-white dark:text-blackMin1 font-bold font-parkinsans py-2 px-4 rounded-md "
         onClick={handleLogout}
       >
         Log Out
