@@ -4,6 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        Glass: "rgba(255, 255, 255, 0.25)",
         primary1: "#87CEEB",
         primary2: "#B0E2FF",
         primary3: "#ADD8E6",
@@ -42,6 +43,7 @@ export default {
           " 0 7px 3px 0 rgba(70, 130, 180, 0.2), 0 2px 10px 0 rgba(70, 130, 180, 0.19);",
         fileShadowDark:
           "0 6px 7px 0 rgba(50,80,220,0.2), 0 6px 15px 0 rgb(50, 80, 220,0.19)",
+        Glass: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
       },
       textShadow: {
         fileShadowDark: "0 6px 7px 0 rgba(50,80,220,0.2)",

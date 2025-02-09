@@ -12,7 +12,7 @@ function LogoutButton() {
     localStorage.clear(); // or sessionStorage.clear();
 
     // Navigate to the login page
-    navigate("/login");
+    navigate("/");
   };
   return (
     <div className="flex flex-row gap-2">

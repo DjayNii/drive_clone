@@ -22,7 +22,7 @@ function UploadButton({ refereshFiles }) {
       formData.append("file", file);
 
       const response = await axios.post(
-        "http://localhost:3000/upload",
+        "https://thriveapp.onrender.com/upload",
         formData,
         {
           headers: {

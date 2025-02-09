@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "motion/react";
+import ImageCarousel from "../components/ImageCarousel";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -22,7 +23,7 @@ function Login() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/user/login",
+        "https://thriveapp.onrender.com/user/login",
         formData,
         {
           withCredentials: true, // Ensures cookies are included
@@ -46,12 +47,14 @@ function Login() {
     <div>
       <div className="bg-white2 dark:bg-blackMin1 w-screen h-screen flex flex-col relative">
         <motion.div
-          className="right bg-primary6 rounded-[46px] w-[60%] h-[90%] top-[5vh] right-[0vh] absolute shadow-custom"
+          className="right  flex justify-center  items-center  rounded-[46px] w-[60%] h-[90%] top-[5vh] right-[3vh] absolute "
           initial={{ x: "100%", scale: 0.5, rotate: -10, opacity: 0 }}
           animate={{ x: "0%", scale: 1, rotate: 0, opacity: 1 }}
           exit={{ x: "-50%", scale: 1.2, rotate: 15, opacity: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1.03, 0.36, 1] }}
-        ></motion.div>
+        >
+          <ImageCarousel X1={-50} X2={0}></ImageCarousel>
+        </motion.div>
         <motion.div
           className="left w-[40%] h-full pl-[5vh] pt-[25vh]"
           initial={{ x: "-50%", opacity: 0, scale: 0.8 }}

@@ -16,7 +16,7 @@ function Home() {
 
   const fetchFiles = async () => {
     try {
-      let response = await axios.get("http://localhost:3000/home", {
+      let response = await axios.get("https://thriveapp.onrender.com/home", {
         withCredentials: true,
       });
 

@@ -7,7 +7,10 @@ function Files({ Name, fileType, path }) {
   async function handleSubmit() {
     try {
       const response = await axios.get(
-        `http://localhost:3000/download/${path.replace("uploads/", "")}`,
+        `https://thriveapp.onrender.com/download/${path.replace(
+          "uploads/",
+          ""
+        )}`,
         {
           withCredentials: true,
         }

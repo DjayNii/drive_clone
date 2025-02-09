@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
+import ImageCarousel from "../components/ImageCarousel";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ function Register() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/user/register",
+        "https://thriveapp.onrender.com/user/register",
         formData
       );
       setSuccess("Registration successful!");
@@ -37,14 +38,16 @@ function Register() {
     <>
       <div className="bg-white1 w-screen h-screen flex flex-col relative">
         <motion.div
-          className="left bg-primary1 rounded-[46px] w-[60%] h-[90%] top-[5vh] absolute  shadow-custom"
+          className="left  rounded-[46px] w-[60%] h-[90%] top-[5vh] left-[2vh] absolute  "
           initial={{ x: "-50%", scale: 0.5, rotate: -10, opacity: 0 }}
           animate={{ x: "0%", scale: 1, rotate: 0, opacity: 1 }}
           exit={{ x: "100%", scale: 1.2, rotate: 15, opacity: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1.03, 0.36, 1] }}
-        ></motion.div>
+        >
+          <ImageCarousel X1={30} X2={0}></ImageCarousel>
+        </motion.div>
         <motion.div
-          className="right w-[40%] h-full pl-[5vh] right-[2vh] absolute pt-[25vh]"
+          className="right w-[40%] h-full pl-[5vh] right-[0vh] absolute pt-[25vh]"
           initial={{ x: "50%", opacity: 0, scale: 0.8 }}
           animate={{ x: "0%", opacity: 1, scale: 1 }}
           exit={{ x: "-50%", opacity: 0, scale: 0.8 }}
@@ -119,7 +122,7 @@ function Register() {
           >
             Already have an account?{" "}
             <Link
-              to="/login"
+              to="/"
               className="font-bold text-primary6 underline cursor-pointer"
             >
               Login
