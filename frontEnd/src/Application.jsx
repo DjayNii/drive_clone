@@ -5,7 +5,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import { AnimatePresence } from "framer-motion";
 
-function App() {
+function Application() {
   const location = useLocation();
   return (
     <>
@@ -22,4 +22,4 @@ function App() {
   );
 }
 
-export default App;
+export default Application;
