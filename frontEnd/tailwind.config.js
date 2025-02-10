@@ -48,6 +48,12 @@ export default {
       textShadow: {
         fileShadowDark: "0 6px 7px 0 rgba(50,80,220,0.2)",
       },
+      backgroundImage: {
+        "deep-ocean":
+          "linear-gradient(135deg, #4682B4 0%, #4169E1 50%, #1E3A8A 100%)",
+        "custom-gradient":
+          "linear-gradient(135deg, #3250DC 0%, #4169E1 50%, #87CEEB 100%)",
+      },
     },
   },
   plugins: [

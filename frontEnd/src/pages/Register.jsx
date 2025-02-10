@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
-import ImageCarousel from "../components/ImageCarousel";
+
+import pattern from "../Assests/pattern.svg";
+import Image from "../components/Image";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -36,18 +38,18 @@ function Register() {
 
   return (
     <>
-      <div className="bg-white1 w-screen h-screen flex flex-col relative">
+      <div className="bg-white1  dark:bg-blackMin1 w-screen h-screen flex flex-col relative">
         <motion.div
-          className="left  rounded-[46px] w-[60%] h-[90%] top-[5vh] left-[2vh] absolute  "
+          className="left bg-deep-ocean  w-[49%] h-[100%] top-[0vh] left-[0vh] absolute  "
           initial={{ x: "-50%", scale: 0.5, rotate: -10, opacity: 0 }}
           animate={{ x: "0%", scale: 1, rotate: 0, opacity: 1 }}
           exit={{ x: "100%", scale: 1.2, rotate: 15, opacity: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1.03, 0.36, 1] }}
         >
-          <ImageCarousel X1={30} X2={0}></ImageCarousel>
+          <Image Src={pattern}></Image>
         </motion.div>
         <motion.div
-          className="right w-[40%] h-full pl-[5vh] right-[0vh] absolute pt-[25vh]"
+          className="right w-[40%] h-full pl-[5vh] right-[20vh] absolute pt-[25vh]"
           initial={{ x: "50%", opacity: 0, scale: 0.8 }}
           animate={{ x: "0%", opacity: 1, scale: 1 }}
           exit={{ x: "-50%", opacity: 0, scale: 0.8 }}
@@ -60,7 +62,7 @@ function Register() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <p className="font-Sora text-black1 text-[72px] font-extrabold m-0 inline">
+            <p className="font-Sora text-black1  dark:text-white1 text-[72px] font-extrabold m-0 inline">
               THRIVE
             </p>
             <p className="font-Sora text-[21px] text-black7 font-light m-0 ps-3">
@@ -84,7 +86,10 @@ function Register() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
               >
-                <label htmlFor={field} className="font-Sora text-black">
+                <label
+                  htmlFor={field}
+                  className="font-Sora text-black dark:text-white1"
+                >
                   {field.charAt(0).toUpperCase() + field.slice(1)}:
                 </label>
                 <input
@@ -94,7 +99,7 @@ function Register() {
                   value={formData[field]}
                   onChange={handleChange}
                   placeholder={`Enter your ${field}`}
-                  className="w-full p-2 bg-white1 rounded-md border-white4 border-solid border-[.3vh] shadow-white4 shadow-md placeholder-black5"
+                  className="w-full p-2 bg-white1  dark:bg-blackMin1 rounded-md border-white4  dark:border-primary6 border-solid border-[.3vh] shadow-fileShadowWhite dark:shadow-fileShadowDark placeholder-black5 dark:placeholder-black7 font-mono text-sm"
                 />
               </motion.div>
             ))}
@@ -104,7 +109,7 @@ function Register() {
 
             {/* Submit Button Animation */}
             <motion.button
-              className="mt-3 ml-3 w-[97%] p-3 rounded-md bg-secondary1 text-[2vh] font-bold hover:bg-[#d2bb44]"
+              className="mt-3 ml-3 w-[97%] p-3 rounded-md bg-secondary1 font-mono text-lg  shadow-fileShadowWhite dark:shadow-fileShadowDark  dark:text-white dark:bg-deep-ocean text-[2vh] font-bold hover:bg-[#d2bb44] "
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.8 }}
@@ -115,15 +120,15 @@ function Register() {
 
           {/* Link Animation */}
           <motion.h4
-            className="mt-4 ml-4 font-Sora font-light"
+            className="mt-4 ml-4 font-Sora font-light dark:text-white"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 1 }}
           >
-            Already have an account?{" "}
+            Already have an account?
             <Link
               to="/"
-              className="font-bold text-primary6 underline cursor-pointer"
+              className="font-bold font-parkinsans ml-1 text-primary6 dark:text-secondary6 underline cursor-pointer"
             >
               Login
             </Link>
