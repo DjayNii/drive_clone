@@ -1,10 +1,8 @@
 import { Route, Routes, useLocation } from "react-router-dom";
-// @ts-ignore
+
 import Home from "./pages/Home";
-// @ts-ignore
-import Register from "./pages/register";
-// @ts-ignore
-import Login from "./pages/login";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 import { AnimatePresence } from "framer-motion";
 
 function App() {

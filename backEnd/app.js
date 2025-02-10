@@ -11,7 +11,7 @@ const cookiesParser = require("cookie-parser");
 
 const app = express();
 const corsOptions = {
-  origin: "http://localhost:5173", // Your frontend URL
+  origin: " https://thriveapp.onrender.com", // Your frontend URL
   credentials: true, // Allows cookies to be sent
 };
 
