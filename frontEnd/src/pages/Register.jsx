@@ -99,7 +99,7 @@ function Register() {
                   value={formData[field]}
                   onChange={handleChange}
                   placeholder={`Enter your ${field}`}
-                  className="w-full p-2 bg-white1  dark:bg-blackMin1 rounded-md border-white4  dark:border-primary6 border-solid border-[.3vh] shadow-fileShadowWhite dark:shadow-fileShadowDark placeholder-black5 dark:placeholder-black7 font-mono text-sm"
+                  className="w-full p-2 bg-white1 dark:text-white1  dark:bg-blackMin1 rounded-md border-white4  dark:border-primary6 border-solid border-[.3vh] shadow-fileShadowWhite dark:shadow-fileShadowDark placeholder-black5 dark:placeholder-black7 font-mono text-sm"
                 />
               </motion.div>
             ))}
