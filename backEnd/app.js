@@ -11,11 +11,18 @@ const cookiesParser = require("cookie-parser");
 
 const app = express();
 const corsOptions = {
-  origin: " https://thriveapp.onrender.com", // Your frontend URL
+  origin: "https://thriveapp.onrender.com", // Corrected URL
   credentials: true, // Allows cookies to be sent
 };
 
 app.use(cors(corsOptions));
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://thriveapp.onrender.com");
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
 
 app.set("view engine", "ejs");
 app.use(cookiesParser());
