@@ -11,7 +11,7 @@ const cookiesParser = require("cookie-parser");
 
 const app = express();
 const corsOptions = {
-  origin: "https://thriveapp.onrender.com", // Corrected URL
+  origin: "https://thriveuploads.netlify.app", // Corrected URL
   credentials: true, // Allows cookies to be sent
 };
 
