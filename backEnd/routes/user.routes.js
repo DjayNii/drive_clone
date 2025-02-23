@@ -13,17 +13,33 @@ router.get("/register", (req, res) => {
 });
 router.post(
   "/register",
-  body("email").trim().isEmail().isLength({ min: 10 }),
-  body("password").trim().isLength({ min: 5 }),
+  body("email")
+    .trim()
+    .isEmail()
+    .matches(/@.*\.com$/) // Ensures email contains '@' and ends with '.com'
+    .isLength({ min: 10 }),
+
+  body("password")
+    .trim()
+    .isLength({ min: 5 })
+    .matches(/\d/) // Ensures at least one number
+    .matches(/[!@#$%^&*(),.?":{}|<>]/), // Ensures at least one special character
+
   body("username").trim().isLength({ min: 3 }),
   async (req, res) => {
     const errors = validationResult(req);
-
     if (!errors.isEmpty()) {
-      return res.status(400).json({
-        errors: errors.array(),
-        message: "Invalid data",
-      });
+      const errorArray = errors.array();
+      const uniqueFields = [...new Set(errorArray.map((err) => err.path))]; // Remove duplicates
+
+      const errMessage =
+        uniqueFields.length > 2
+          ? `Invalid ${uniqueFields
+              .slice(0, -1)
+              .join(", ")} and ${uniqueFields.slice(-1)}`
+          : `Invalid ${uniqueFields.join(" and ")}`;
+
+      return res.status(400).json({ message: errMessage });
     }
 
     const { email, username, password } = req.body;
@@ -57,15 +73,11 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     errorArray = errors.array();
-    // const errMessage =
-    //   errorArray.length > 1
-    //     ? `Invalid ${errorArray[0].path} and ${errorArray[1].path}`
-    //     : `Invalid ${errorArray[0].path}`;
 
     if (!errors.isEmpty()) {
       return res.status(400).json({
         error: errors.array(),
-        message: "Invalid data",
+        message: "Invalid Username or Password",
       });
     }
 

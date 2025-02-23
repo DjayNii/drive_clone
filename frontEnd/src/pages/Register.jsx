@@ -26,7 +26,7 @@ function Register() {
 
     try {
       const response = await axios.post(
-        "https://thriveapp.onrender.com/user/register",
+        "http://localhost:3000/user/register",
         formData
       );
       setSuccess("Registration successful!");

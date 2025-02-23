@@ -14,6 +14,7 @@ const corsOptions = {
   origin: [
     "https://thriveuploads.netlify.app",
     "https://thriveapp.onrender.com",
+    "http://localhost:5173",
   ],
   credentials: true, // Allows cookies to be sent
 };
