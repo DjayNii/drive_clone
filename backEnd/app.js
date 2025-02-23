@@ -11,16 +11,28 @@ const cookiesParser = require("cookie-parser");
 
 const app = express();
 const corsOptions = {
-  origin: "https://thriveuploads.netlify.app", // Corrected URL
+  origin: [
+    "https://thriveuploads.netlify.app",
+    "https://thriveapp.onrender.com",
+  ],
   credentials: true, // Allows cookies to be sent
 };
 
 app.use(cors(corsOptions));
+
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://thriveapp.onrender.com");
+  res.header("Access-Control-Allow-Origin", req.headers.origin);
   res.header("Access-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+
   next();
 });
 
@@ -33,5 +45,5 @@ app.use("/", indexRouter);
 app.use("/user", userRouter);
 
 app.listen(3000, () => {
-  console.log("server listing on port 3000");
+  console.log("server listening on port 3000");
 });
