@@ -73,12 +73,11 @@ router.post(
 );
 
 router.get("/download/:path", AuthMiddleWare, async (req, res) => {
-  const loggedInUserId = "6794c012f9f314f61814db63";
   const path = req.params.path;
   const download_path = `uploads/${path}`;
 
   const file = await fileModel.findOne({
-    user: loggedInUserId,
+    user: req.user.userID,
     path: download_path,
   });
 
