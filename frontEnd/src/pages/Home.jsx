@@ -97,7 +97,7 @@ function Home() {
               </motion.div>
             ))
           ) : (
-            <p>No files available</p>
+            <p className="dark:text-white1">No files available</p>
           )}
         </motion.div>
       </motion.main>
