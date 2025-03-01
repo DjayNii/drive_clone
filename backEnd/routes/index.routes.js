@@ -34,10 +34,10 @@ router.post(
       return res.status(400).send("No file uploaded.");
     }
     const userID = req.user.userID;
-    const filePathSupabase = `aakpak/${req.file.originalname}`;
+    const filePathSupabase = `uploads/${userID}/${req.file.originalname}`;
 
     const { data, error } = await supabase.storage
-      .from("thrive")
+      .from("drive")
       .upload(filePathSupabase, req.file.buffer, {
         contentType: req.file.mimetype,
       }); // this extracts the data from supabase
@@ -59,7 +59,7 @@ router.post(
 
     console.log("Generated Signed URL:");
     const { data: signedData, error: signedError } = await supabase.storage
-      .from("thrive")
+      .from("drive")
       .createSignedUrl(filePath, 60);
 
     if (signedError) {
@@ -90,7 +90,7 @@ router.get("/download/:path", AuthMiddleWare, async (req, res) => {
   }
 
   const { data, error } = await supabase.storage
-    .from("thrive")
+    .from("drive")
     .createSignedUrl(download_path, 60, { download: file.name });
 
   if (error) {
